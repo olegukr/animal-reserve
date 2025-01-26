@@ -1,5 +1,7 @@
 package org.factoriaf5.animal_reserve.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +15,17 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("countryName")
     @Column(nullable = false, unique = true)
     private String countryName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
 
     // Getters and setters
     // Constructor(s)
