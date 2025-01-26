@@ -151,10 +151,24 @@ erDiagram
         BIGINT id PK
         VARCHAR username
         VARCHAR password
-        VARCHAR role
+        BIGINT role_id FK
     }
-    
+    Role {
+        BIGINT id PK
+        VARCHAR name
+    }
+    Profile {
+        BIGINT id PK
+        VARCHAR firstName
+        VARCHAR lastName
+        VARCHAR email
+        BIGINT user_id FK
+    }
+
     Animal ||--o{ AnimalType : "belongs to"
     Animal ||--o{ AnimalFamily : "belongs to"
     Animal ||--o{ Gender : "has"
     Animal ||--o{ Country : "originates from"
+    User ||--|{ Profile : "has one"
+    User }o--|| Role : "belongs to"
+
