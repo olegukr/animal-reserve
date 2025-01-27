@@ -21,54 +21,71 @@ public class AnimalService {
         Pageable pageable = PageRequest.of(page, size);
         return animalRepository.findAll(pageable)
                 .map(animal -> new AnimalDTO(
-                        animal.getName(),
-                        animal.getType().getTypeName(),
-                        animal.getFamily().getFamilyName(),
-                        animal.getGender().getGenderName(),
-                        animal.getCountry().getCountryName(),
-                        animal.getDateOfEntry().toString()
-                ));
+                animal.getName(),
+                animal.getType().getTypeName(),
+                animal.getFamily().getFamilyName(),
+                animal.getGender().getGenderName(),
+                animal.getCountry().getCountryName(),
+                animal.getDateOfEntry().toString()));
     }
 
     public Page<AnimalDTO> getAnimalsByFamily(String family, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return animalRepository.findByFamilyFamilyName(family, pageable)
                 .map(animal -> new AnimalDTO(
-                        animal.getName(),
-                        animal.getType().getTypeName(),
-                        animal.getFamily().getFamilyName(),
-                        animal.getGender().getGenderName(),
-                        animal.getCountry().getCountryName(),
-                        animal.getDateOfEntry().toString()
-                ));
+                animal.getName(),
+                animal.getType().getTypeName(),
+                animal.getFamily().getFamilyName(),
+                animal.getGender().getGenderName(),
+                animal.getCountry().getCountryName(),
+                animal.getDateOfEntry().toString()));
     }
-    
+
     public List<AnimalDTO> getAnimalsByCountry(String country) {
-    return animalRepository.findByCountryCountryName(country)
-            .stream()
-            .map(animal -> new AnimalDTO(
-                    animal.getName(),
-                    animal.getType().getTypeName(),
-                    animal.getFamily().getFamilyName(),
-                    animal.getGender().getGenderName(),
-                    animal.getCountry().getCountryName(),
-                    animal.getDateOfEntry().toString()
-            ))
-            .collect(Collectors.toList());
+        return animalRepository.findByCountryCountryName(country)
+                .stream()
+                .map(animal -> new AnimalDTO(
+                animal.getName(),
+                animal.getType().getTypeName(),
+                animal.getFamily().getFamilyName(),
+                animal.getGender().getGenderName(),
+                animal.getCountry().getCountryName(),
+                animal.getDateOfEntry().toString()))
+                .collect(Collectors.toList());
     }
 
     public List<AnimalDTO> getAnimalsByFamilyAndType(String family, String type) {
         return animalRepository.findByFamilyFamilyNameAndTypeTypeName(family, type)
+        // return animalRepository.findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(family, type)
                 .stream()
                 .map(animal -> new AnimalDTO(
-                        animal.getName(),
-                        animal.getType().getTypeName(),
-                        animal.getFamily().getFamilyName(),
-                        animal.getGender().getGenderName(),
-                        animal.getCountry().getCountryName(),
-                        animal.getDateOfEntry().toString()
-                ))
+                animal.getName(),
+                animal.getType().getTypeName(),
+                animal.getFamily().getFamilyName(),
+                animal.getGender().getGenderName(),
+                animal.getCountry().getCountryName(),
+                animal.getDateOfEntry().toString()))
                 .collect(Collectors.toList());
     }
-    
+
+
+    // // for Test only
+    // public List<AnimalDTO> getAnimalsByFamilyAndType(String family, String type) {
+    //     System.out.println("Family: " + family);
+    //     System.out.println("Type: " + type);
+    //     List<Animal> animals
+    //             = animalRepository.findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(family,
+    //                     type);
+    //     System.out.println("Found animals: " + animals);
+    //     return animals.stream()
+    //             .map(animal -> new AnimalDTO(
+    //             animal.getName(),
+    //             animal.getType().getTypeName(),
+    //             animal.getFamily().getFamilyName(),
+    //             animal.getGender().getGenderName(),
+    //             animal.getCountry().getCountryName(),
+    //             animal.getDateOfEntry().toString()
+    //     ))
+    //             .collect(Collectors.toList());
+    // }
 }

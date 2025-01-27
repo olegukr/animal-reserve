@@ -1,12 +1,17 @@
 package org.factoriaf5.animal_reserve.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class AnimalFamily {
@@ -18,6 +23,10 @@ public class AnimalFamily {
     @JsonProperty("familyName")
     @Column(nullable = false, unique = true)
     private String familyName;
+
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Animal> animals;
+
 
     public Long getId() {
         return id;

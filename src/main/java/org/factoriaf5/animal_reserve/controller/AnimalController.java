@@ -24,18 +24,18 @@ public class AnimalController {
 
     @GetMapping
     public Page<AnimalDTO> getPaginatedAnimals(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
     ) {
         return animalService.getPaginatedAnimals(page, size);
     }
 
     @GetMapping("/family")
     public Page<AnimalDTO> getAnimalsByFamily(
-        @RequestParam String family,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size
-        ) {
+            @RequestParam String family,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         return animalService.getAnimalsByFamily(family, page, size);
     }
 
@@ -46,8 +46,8 @@ public class AnimalController {
 
     @GetMapping("/family-and-type")
     public List<AnimalDTO> getAnimalsByFamilyAndType(
-        @RequestParam String family,
-        @RequestParam String type
+            @RequestParam String family,
+            @RequestParam String type
     ) {
         return animalService.getAnimalsByFamilyAndType(family, type);
     }

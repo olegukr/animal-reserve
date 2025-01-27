@@ -91,7 +91,7 @@ INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of
 
 -- Insert animals for Reptiles
 INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(15, 'Croc', 15, 3, 1, 3, '2025-01-01', NULL),
+(15, 'Croc', 15, 3, 1, 3, '2025-01-01', NULL),  
 (16, 'Slither', 16, 3, 2, 4, '2025-01-02', NULL),
 (17, 'Iggy', 17, 3, 2, 5, '2025-01-03', NULL),
 (18, 'Turt', 18, 3, 1, 1, '2025-01-04', NULL),

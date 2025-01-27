@@ -11,11 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
-  Page<Animal> findByFamilyFamilyName(String familyName, Pageable pageable);
+    Page<Animal> findByFamilyFamilyName(String familyName, Pageable pageable);
 
-  List<Animal> findByCountryCountryName(String countryName);
+    List<Animal> findByCountryCountryName(String countryName);
 
-  List<Animal> findByFamilyFamilyNameAndTypeTypeName(String familyName, String typeName);
+    List<Animal> findByFamilyFamilyNameAndTypeTypeName(String familyName, String typeName);
+
+    // List<Animal> findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(String familyName, String typeName);
 
 }
-

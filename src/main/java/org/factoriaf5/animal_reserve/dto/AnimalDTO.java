@@ -1,10 +1,25 @@
 package org.factoriaf5.animal_reserve.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+// @Data
+// @AllArgsConstructor 
+// public class AnimalDTO {
+//     private String name;
+//     private String type;
+//     private String family;
+//     private String gender;
+//     private String country;
+//     private String dateOfEntry;
+// }
+
+
+// import lombok.Data;
+// import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor 
+@NoArgsConstructor // Required for frameworks like Hibernate
 public class AnimalDTO {
     private String name;
     private String type;
@@ -12,5 +27,14 @@ public class AnimalDTO {
     private String gender;
     private String country;
     private String dateOfEntry;
-}
 
+// Manually add a constructor
+public AnimalDTO(String name, String type, String family, String gender, String country, String dateOfEntry) {
+    this.name = name;
+    this.type = type;
+    this.family = family;
+    this.gender = gender;
+    this.country = country;
+    this.dateOfEntry = dateOfEntry;
+    }
+}
