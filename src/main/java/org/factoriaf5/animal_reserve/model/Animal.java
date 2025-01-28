@@ -16,38 +16,6 @@ import jakarta.persistence.TemporalType;
 @Entity
 public class Animal {
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
-
-    // @JsonProperty("name")
-    // private String name;
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "type_id", nullable = false)
-    // @JsonProperty("type")
-    // private AnimalType type;
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "family_id", nullable = false)
-    // @JsonProperty("family")
-    // private AnimalFamily family;
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "gender_id", nullable = false)
-    // @JsonProperty("gender")
-    // private Gender gender;
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "country_id", nullable = false)
-    // @JsonProperty("country")
-    // private Country country;
-
-    // @JsonProperty("dateOfEntry")
-    // @Temporal(TemporalType.DATE)
-    // private Date dateOfEntry;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -73,10 +41,10 @@ public class Animal {
     @Temporal(TemporalType.DATE)
     private Date dateOfEntry;
 
-
-
-
     private String image;
+
+
+    // Getters and setters
 
     public String getName() {
         return name;
@@ -106,7 +74,36 @@ public class Animal {
         return image;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-    // Getters and setters
-    // Constructor(s)
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(AnimalType type) {
+        this.type = type;
+    }
+
+    public void setFamily(AnimalFamily family) {
+        this.family = family;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public void setDateOfEntry(Date dateOfEntry) {
+        this.dateOfEntry = dateOfEntry;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

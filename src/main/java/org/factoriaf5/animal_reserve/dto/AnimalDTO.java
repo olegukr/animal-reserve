@@ -38,3 +38,4 @@ public AnimalDTO(String name, String type, String family, String gender, String 
     this.dateOfEntry = dateOfEntry;
     }
 }
+

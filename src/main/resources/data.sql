@@ -70,51 +70,51 @@ INSERT INTO animal_type (id, type_name) VALUES
 (35, 'Volcano Rabbit');
 
 -- Insert animals for Felidae
-INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(1, 'Leo', 1, 1, 1, 1, '2025-01-01', NULL),
-(2, 'Shere Khan', 2, 1, 1, 1, '2025-01-02', NULL),
-(3, 'Bagheera', 3, 1, 2, 2, '2025-01-03', NULL),
-(4, 'Simba', 1, 1, 1, 3, '2025-01-04', NULL),
-(5, 'Nala', 1, 1, 2, 3, '2025-01-05', NULL),
-(6, 'Spotty', 4, 1, 2, 4, '2025-01-06', NULL),
-(7, 'Shadow', 5, 1, 1, 5, '2025-01-07', NULL);
+INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
+('Leo', 1, 1, 1, 1, '2025-01-01', NULL),
+('Shere Khan', 2, 1, 1, 1, '2025-01-02', NULL),
+('Bagheera', 3, 1, 2, 2, '2025-01-03', NULL),
+('Simba', 1, 1, 1, 3, '2025-01-04', NULL),
+('Nala', 1, 1, 2, 3, '2025-01-05', NULL),
+('Spotty', 4, 1, 2, 4, '2025-01-06', NULL),
+('Shadow', 5, 1, 1, 5, '2025-01-07', NULL);
 
 -- Insert animals for Canids
-INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(8, 'Foxy', 8, 2, 2, 1, '2025-01-01', NULL),
-(9, 'White Fang', 9, 2, 1, 2, '2025-01-02', NULL),
-(10, 'Jack', 10, 2, 1, 3, '2025-01-03', NULL),
-(11, 'Dingo', 11, 2, 2, 4, '2025-01-04', NULL),
-(12, 'Coyote', 12, 2, 1, 5, '2025-01-05', NULL),
-(13, 'Rocco', 13, 2, 1, 1, '2025-01-06', NULL),
-(14, 'Manny', 14, 2, 2, 2, '2025-01-07', NULL);
+INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
+('Foxy', 8, 2, 2, 1, '2025-01-01', NULL),
+('White Fang', 9, 2, 1, 2, '2025-01-02', NULL),
+('Jack', 10, 2, 1, 3, '2025-01-03', NULL),
+('Dingo', 11, 2, 2, 4, '2025-01-04', NULL),
+('Coyote', 12, 2, 1, 5, '2025-01-05', NULL),
+('Rocco', 13, 2, 1, 1, '2025-01-06', NULL),
+('Manny', 14, 2, 2, 2, '2025-01-07', NULL);
 
 -- Insert animals for Reptiles
-INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(15, 'Croc', 15, 3, 1, 3, '2025-01-01', NULL),  
-(16, 'Slither', 16, 3, 2, 4, '2025-01-02', NULL),
-(17, 'Iggy', 17, 3, 2, 5, '2025-01-03', NULL),
-(18, 'Turt', 18, 3, 1, 1, '2025-01-04', NULL),
-(19, 'Chamy', 19, 3, 2, 2, '2025-01-05', NULL),
-(20, 'Gex', 20, 3, 1, 3, '2025-01-06', NULL),
-(21, 'Ali', 21, 3, 1, 4, '2025-01-07', NULL);
+INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
+('Croc', 15, 3, 1, 3, '2025-01-01', NULL),  
+('Slither', 16, 3, 2, 4, '2025-01-02', NULL),
+('Iggy', 17, 3, 2, 5, '2025-01-03', NULL),
+('Turt', 18, 3, 1, 1, '2025-01-04', NULL),
+('Chamy', 19, 3, 2, 2, '2025-01-05', NULL),
+('Gex', 20, 3, 1, 3, '2025-01-06', NULL),
+('Ali', 21, 3, 1, 4, '2025-01-07', NULL);
 
 -- Insert animals for Mustelids
-INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(22, 'Otto', 22, 4, 1, 5, '2025-01-01', NULL),
-(23, 'Weasel', 23, 4, 2, 1, '2025-01-02', NULL),
-(24, 'Badger', 24, 4, 1, 2, '2025-01-03', NULL),
-(25, 'Martin', 25, 4, 2, 3, '2025-01-04', NULL),
-(26, 'Ferry', 26, 4, 2, 4, '2025-01-05', NULL),
-(27, 'Poley', 27, 4, 1, 5, '2025-01-06', NULL),
-(28, 'Mink', 28, 4, 2, 1, '2025-01-07', NULL);
+INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
+('Otto', 22, 4, 1, 5, '2025-01-01', NULL),
+('Weasel', 23, 4, 2, 1, '2025-01-02', NULL),
+('Badger', 24, 4, 1, 2, '2025-01-03', NULL),
+('Martin', 25, 4, 2, 3, '2025-01-04', NULL),
+('Ferry', 26, 4, 2, 4, '2025-01-05', NULL),
+('Poley', 27, 4, 1, 5, '2025-01-06', NULL),
+('Mink', 28, 4, 2, 1, '2025-01-07', NULL);
 
 -- Insert animals for Leporidae
-INSERT INTO animal (id, name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
-(29, 'Bunny', 29, 5, 1, 2, '2025-01-01', NULL),
-(30, 'Hopper', 30, 5, 2, 3, '2025-01-02', NULL),
-(31, 'Cotton', 31, 5, 1, 4, '2025-01-03', NULL),
-(32, 'Pika', 32, 5, 2, 5, '2025-01-04', NULL),
-(33, 'Jacky', 33, 5, 1, 1, '2025-01-05', NULL),
-(34, 'Snow', 34, 5, 2, 2, '2025-01-06', NULL),
-(35, 'Volcano', 35, 5, 1, 3, '2025-01-07', NULL);
+INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_entry, image) VALUES
+('Bunny', 29, 5, 1, 2, '2025-01-01', NULL),
+('Hopper', 30, 5, 2, 3, '2025-01-02', NULL),
+('Cotton', 31, 5, 1, 4, '2025-01-03', NULL),
+('Pika', 32, 5, 2, 5, '2025-01-04', NULL),
+('Jacky', 33, 5, 1, 1, '2025-01-05', NULL),
+('Snow', 34, 5, 2, 2, '2025-01-06', NULL),
+('Volcano', 35, 5, 1, 3, '2025-01-07', NULL);

@@ -8,9 +8,12 @@ import org.factoriaf5.animal_reserve.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequestMapping("${api-endpoint}/animals")
@@ -51,5 +54,21 @@ public class AnimalController {
     ) {
         return animalService.getAnimalsByFamilyAndType(family, type);
     }
+
+    @GetMapping("/count")
+    public long getTotalAnimals() {
+    return animalService.getTotalAnimals();
+    }
+
+    @GetMapping("/name")
+    public AnimalDTO getAnimalByName(@RequestParam String name) {
+    return animalService.getAnimalByName(name);
+    }
+
+    @PostMapping
+    public AnimalDTO addAnimal(@RequestBody AnimalDTO animalDTO) {
+        return animalService.addAnimal(animalDTO);
+    }
+    
 
 }
