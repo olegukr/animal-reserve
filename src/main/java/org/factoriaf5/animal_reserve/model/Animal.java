@@ -2,6 +2,8 @@ package org.factoriaf5.animal_reserve.model;
 
 import java.util.Date;
 
+import org.factoriaf5.animal_reserve.dto.AnimalDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,20 @@ public class Animal {
 
     private String image;
 
+    public Animal() {}
+
+    // Constructor for creating DTO from Entity
+    public AnimalDTO toDTO() {
+        return new AnimalDTO(
+                this.id,
+                this.name,
+                this.type.getTypeName(),
+                this.family.getFamilyName(),
+                this.gender.getGenderName(),
+                this.country.getCountryName(),
+                this.dateOfEntry.toString()
+        );
+    }
 
     // Getters and setters
 

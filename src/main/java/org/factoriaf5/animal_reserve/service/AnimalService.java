@@ -37,55 +37,26 @@ public class AnimalService {
     public Page<AnimalDTO> getPaginatedAnimals(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return animalRepository.findAll(pageable)
-            .map(animal -> new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()));
+            .map(Animal::toDTO);
     }
 
     public Page<AnimalDTO> getAnimalsByFamily(String family, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return animalRepository.findByFamilyFamilyName(family, pageable)
-            .map(animal -> new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()));
+            .map(Animal::toDTO);
     }
 
     public List<AnimalDTO> getAnimalsByCountry(String country) {
         return animalRepository.findByCountryCountryName(country)
             .stream()
-            .map(animal -> new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()))
+            .map(Animal::toDTO)
             .collect(Collectors.toList());
     }
 
     public List<AnimalDTO> getAnimalsByFamilyAndType(String family, String type) {
-        return animalRepository.findByFamilyFamilyNameAndTypeTypeName(family, type)
-        // return animalRepository.findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(family, type)
+        return (List<AnimalDTO>) animalRepository.findByFamilyFamilyNameAndTypeTypeName(family, type)
             .stream()
-            .map(animal -> new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()))
+            .map(Animal::toDTO)
             .collect(Collectors.toList());
     }
 
@@ -96,55 +67,32 @@ public class AnimalService {
     public AnimalDTO getAnimalByName(String name) {
         Animal animal = animalRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Animal not found"));
-        return new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()
-            );
+        return animal.toDTO();
         }
 
-        public AnimalDTO getAnimalById(Long id) {
-            Animal animal = animalRepository.findById(id)
+    public AnimalDTO getAnimalById(Long id) {
+        Animal animal = animalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Animal not found"));
-        return new AnimalDTO(
-            animal.getId(),
-            animal.getName(),
-            animal.getType().getTypeName(),
-            animal.getFamily().getFamilyName(),
-            animal.getGender().getGenderName(),
-            animal.getCountry().getCountryName(),
-            animal.getDateOfEntry().toString()
-            );
-
-        }
+        return  animal.toDTO();
+    }
 
     public AnimalDTO addAnimal(AnimalDTO animalDTO) {
         Animal animal = new Animal();
-        animal.setName(animalDTO.getName());
-        animal.setType(animalTypeRepository.findByTypeName(animalDTO.getType())
+    
+        animal.setName(animalDTO.name());
+        animal.setType(animalTypeRepository.findByTypeName(animalDTO.type())
             .orElseThrow(() -> new RuntimeException("Animal type not found")));
-        animal.setFamily(animalFamilyRepository.findByFamilyName(animalDTO.getFamily())
+        animal.setFamily(animalFamilyRepository.findByFamilyName(animalDTO.family())
             .orElseThrow(() -> new RuntimeException("Animal family not found")));
-        animal.setGender(genderRepository.findByGenderName(animalDTO.getGender())
+        animal.setGender(genderRepository.findByGenderName(animalDTO.gender())
             .orElseThrow(() -> new RuntimeException("Gender not found")));
-        animal.setCountry(countryRepository.findByCountryName(animalDTO.getCountry())
+        animal.setCountry(countryRepository.findByCountryName(animalDTO.country())
             .orElseThrow(() -> new RuntimeException("Country not found")));
-        animal.setDateOfEntry(java.sql.Date.valueOf(animalDTO.getDateOfEntry()));
+        animal.setDateOfEntry(java.sql.Date.valueOf(animalDTO.dateOfEntry()));
     
         Animal savedAnimal = animalRepository.save(animal);
-        return new AnimalDTO(
-            savedAnimal.getId(),
-            savedAnimal.getName(),
-            savedAnimal.getType().getTypeName(),
-            savedAnimal.getFamily().getFamilyName(),
-            savedAnimal.getGender().getGenderName(),
-            savedAnimal.getCountry().getCountryName(),
-            savedAnimal.getDateOfEntry().toString()
-        );
+    
+        return savedAnimal.toDTO();
     }
 
     public String deleteAnimalById(Long id) {
@@ -157,38 +105,30 @@ public class AnimalService {
     }
 
     public AnimalDTO updateAnimal(Long id, AnimalDTO updatedAnimalDTO) {
+        
         Animal animal = animalRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Animal with ID " + id + " does not exist."));
-
-        // Validate and set updated fields
-        animal.setName(updatedAnimalDTO.getName());
-
-        animal.setType(animalTypeRepository.findByTypeName(updatedAnimalDTO.getType())
-                .orElseThrow(() -> new RuntimeException("Animal type " + updatedAnimalDTO.getType() + " not found.")));
-
-        animal.setFamily(animalFamilyRepository.findByFamilyName(updatedAnimalDTO.getFamily())
-                .orElseThrow(() -> new RuntimeException("Animal family " + updatedAnimalDTO.getFamily() + " not found.")));
-
-        animal.setGender(genderRepository.findByGenderName(updatedAnimalDTO.getGender())
-                .orElseThrow(() -> new RuntimeException("Gender " + updatedAnimalDTO.getGender() + " not found.")));
-
-        animal.setCountry(countryRepository.findByCountryName(updatedAnimalDTO.getCountry())
-                .orElseThrow(() -> new RuntimeException("Country " + updatedAnimalDTO.getCountry() + " not found.")));
-
-        animal.setDateOfEntry(java.sql.Date.valueOf(updatedAnimalDTO.getDateOfEntry()));
-
-        // Save updated animal
+    
+        animal.setName(updatedAnimalDTO.name());
+        
+        animal.setType(animalTypeRepository.findByTypeName(updatedAnimalDTO.type())
+                .orElseThrow(() -> new RuntimeException("Animal type " + updatedAnimalDTO.type() + " not found.")));
+    
+        animal.setFamily(animalFamilyRepository.findByFamilyName(updatedAnimalDTO.family())
+                .orElseThrow(() -> new RuntimeException("Animal family " + updatedAnimalDTO.family() + " not found.")));
+    
+        animal.setGender(genderRepository.findByGenderName(updatedAnimalDTO.gender())
+                .orElseThrow(() -> new RuntimeException("Gender " + updatedAnimalDTO.gender() + " not found.")));
+    
+        animal.setCountry(countryRepository.findByCountryName(updatedAnimalDTO.country())
+                .orElseThrow(() -> new RuntimeException("Country " + updatedAnimalDTO.country() + " not found.")));
+    
+        animal.setDateOfEntry(java.sql.Date.valueOf(updatedAnimalDTO.dateOfEntry()));
+    
         Animal updatedAnimal = animalRepository.save(animal);
-
-        return new AnimalDTO(
-                updatedAnimal.getId(),
-                updatedAnimal.getName(),
-                updatedAnimal.getType().getTypeName(),
-                updatedAnimal.getFamily().getFamilyName(),
-                updatedAnimal.getGender().getGenderName(),
-                updatedAnimal.getCountry().getCountryName(),
-                updatedAnimal.getDateOfEntry().toString()
-        );
+    
+        return updatedAnimal.toDTO();
     }
+    
 
 }
