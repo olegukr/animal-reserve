@@ -107,6 +107,21 @@ public class AnimalService {
             );
         }
 
+        public AnimalDTO getAnimalById(Long id) {
+            Animal animal = animalRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Animal not found"));
+        return new AnimalDTO(
+            animal.getId(),
+            animal.getName(),
+            animal.getType().getTypeName(),
+            animal.getFamily().getFamilyName(),
+            animal.getGender().getGenderName(),
+            animal.getCountry().getCountryName(),
+            animal.getDateOfEntry().toString()
+            );
+
+        }
+
     public AnimalDTO addAnimal(AnimalDTO animalDTO) {
         Animal animal = new Animal();
         animal.setName(animalDTO.getName());
@@ -139,6 +154,41 @@ public class AnimalService {
 
         animalRepository.deleteById(id);
         return "Animal with ID " + id + " has been successfully deleted.";
+    }
+
+    public AnimalDTO updateAnimal(Long id, AnimalDTO updatedAnimalDTO) {
+        Animal animal = animalRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Animal with ID " + id + " does not exist."));
+
+        // Validate and set updated fields
+        animal.setName(updatedAnimalDTO.getName());
+
+        animal.setType(animalTypeRepository.findByTypeName(updatedAnimalDTO.getType())
+                .orElseThrow(() -> new RuntimeException("Animal type " + updatedAnimalDTO.getType() + " not found.")));
+
+        animal.setFamily(animalFamilyRepository.findByFamilyName(updatedAnimalDTO.getFamily())
+                .orElseThrow(() -> new RuntimeException("Animal family " + updatedAnimalDTO.getFamily() + " not found.")));
+
+        animal.setGender(genderRepository.findByGenderName(updatedAnimalDTO.getGender())
+                .orElseThrow(() -> new RuntimeException("Gender " + updatedAnimalDTO.getGender() + " not found.")));
+
+        animal.setCountry(countryRepository.findByCountryName(updatedAnimalDTO.getCountry())
+                .orElseThrow(() -> new RuntimeException("Country " + updatedAnimalDTO.getCountry() + " not found.")));
+
+        animal.setDateOfEntry(java.sql.Date.valueOf(updatedAnimalDTO.getDateOfEntry()));
+
+        // Save updated animal
+        Animal updatedAnimal = animalRepository.save(animal);
+
+        return new AnimalDTO(
+                updatedAnimal.getId(),
+                updatedAnimal.getName(),
+                updatedAnimal.getType().getTypeName(),
+                updatedAnimal.getFamily().getFamilyName(),
+                updatedAnimal.getGender().getGenderName(),
+                updatedAnimal.getCountry().getCountryName(),
+                updatedAnimal.getDateOfEntry().toString()
+        );
     }
 
 }
