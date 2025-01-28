@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor // Required for frameworks like Hibernate
 public class AnimalDTO {
+    private Long id;
     private String name;
     private String type;
     private String family;
@@ -29,7 +30,8 @@ public class AnimalDTO {
     private String dateOfEntry;
 
 // Manually add a constructor
-public AnimalDTO(String name, String type, String family, String gender, String country, String dateOfEntry) {
+public AnimalDTO(Long id, String name, String type, String family, String gender, String country, String dateOfEntry) {
+    this.id = id;
     this.name = name;
     this.type = type;
     this.family = family;

@@ -23,6 +23,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
     Optional<Animal> findByName(String name);
 
+    boolean existsById(Long id);
+
     // List<Animal> findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(String familyName, String typeName);
 
 }
