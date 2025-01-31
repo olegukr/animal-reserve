@@ -147,28 +147,45 @@ erDiagram
         BIGINT id PK
         VARCHAR country_name
     }
-    User {
-        BIGINT id PK
-        VARCHAR username
-        VARCHAR password
-        BIGINT role_id FK
-    }
-    Role {
-        BIGINT id PK
-        VARCHAR name
-    }
-    Profile {
-        BIGINT id PK
-        VARCHAR firstName
-        VARCHAR lastName
-        VARCHAR email
-        BIGINT user_id FK
-    }
+    
 
     Animal ||--o{ AnimalType : "belongs to"
     Animal ||--o{ AnimalFamily : "belongs to"
     Animal ||--o{ Gender : "has"
     Animal ||--o{ Country : "originates from"
-    User ||--|{ Profile : "has one"
-    User }o--|| Role : "belongs to"
+```
 
+```mermaid
+erDiagram
+    USER {
+        Long id_user PK
+        String username 
+        String password
+    }
+
+    PROFILE {
+        Long id_profile PK
+        String firstName
+        String lastName
+        String email 
+        Long user_id FK
+    }
+
+    ROLES {
+        Long id_role PK
+        String name 
+    }
+
+    ROLES_USERS {
+        Long role_id FK
+        Long user_id FK
+    }
+
+    USER ||--|| PROFILE : "one to one"
+    USER }o--|| ROLES_USERS : "many-to-one" 
+    ROLES }o--|| ROLES_USERS : "many-to-one" 
+ 
+
+
+
+```

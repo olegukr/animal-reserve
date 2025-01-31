@@ -12,8 +12,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name = "animal_family")
 public class AnimalFamily {
 
     @Id
@@ -27,15 +31,35 @@ public class AnimalFamily {
     @OneToMany(mappedBy = "family", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Animal> animals;
 
-
+    public AnimalFamily() {}
+    
     public Long getId() {
         return id;
     }
+
 
     public String getFamilyName() {
         return familyName;
     }
 
-    // Getters and setters
-    // Constructor(s)
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+    
 }

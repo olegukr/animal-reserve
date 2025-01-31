@@ -16,11 +16,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AnimalService {
 
     @Autowired
     private AnimalRepository animalRepository;
+
+    // public AnimalService(AnimalRepository animalRepository) {
+    //     this.animalRepository = animalRepository;
+    // }
 
     @Autowired
     private AnimalTypeRepository animalTypeRepository;
@@ -46,6 +53,13 @@ public class AnimalService {
             .map(Animal::toDTO);
     }
 
+    public List<AnimalDTO> getAllAnimals() {
+        return animalRepository.findAll()
+            .stream()
+            .map(Animal::toDTO)
+            .collect(Collectors.toList());
+    }
+
     public List<AnimalDTO> getAnimalsByCountry(String country) {
         return animalRepository.findByCountryCountryName(country)
             .stream()
@@ -54,7 +68,7 @@ public class AnimalService {
     }
 
     public List<AnimalDTO> getAnimalsByFamilyAndType(String family, String type) {
-        return (List<AnimalDTO>) animalRepository.findByFamilyFamilyNameAndTypeTypeName(family, type)
+        return (List<AnimalDTO>) animalRepository.findByFamily_FamilyNameAndType_TypeName(family, type)
             .stream()
             .map(Animal::toDTO)
             .collect(Collectors.toList());
@@ -82,7 +96,7 @@ public class AnimalService {
         animal.setName(animalDTO.name());
         animal.setType(animalTypeRepository.findByTypeName(animalDTO.type())
             .orElseThrow(() -> new RuntimeException("Animal type not found")));
-        animal.setFamily(animalFamilyRepository.findByFamilyName(animalDTO.family())
+        animal.setFamilyName(animalFamilyRepository.findByFamilyName(animalDTO.family())
             .orElseThrow(() -> new RuntimeException("Animal family not found")));
         animal.setGender(genderRepository.findByGenderName(animalDTO.gender())
             .orElseThrow(() -> new RuntimeException("Gender not found")));
@@ -114,7 +128,7 @@ public class AnimalService {
         animal.setType(animalTypeRepository.findByTypeName(updatedAnimalDTO.type())
                 .orElseThrow(() -> new RuntimeException("Animal type " + updatedAnimalDTO.type() + " not found.")));
     
-        animal.setFamily(animalFamilyRepository.findByFamilyName(updatedAnimalDTO.family())
+        animal.setFamilyName(animalFamilyRepository.findByFamilyName(updatedAnimalDTO.family())
                 .orElseThrow(() -> new RuntimeException("Animal family " + updatedAnimalDTO.family() + " not found.")));
     
         animal.setGender(genderRepository.findByGenderName(updatedAnimalDTO.gender())

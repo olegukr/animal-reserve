@@ -119,20 +119,15 @@ INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_ent
 ('Snow', 34, 5, 2, 2, '2025-01-06', NULL),
 ('Volcano', 35, 5, 1, 3, '2025-01-07', NULL);
 
--- Insert roles
-INSERT INTO roles (id_role, name) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO roles (id_role, name) VALUES (2, 'ROLE_USER');
+/* Roles */
+INSERT INTO roles (id_role, name) VALUES (default, 'ROLE_USER');
+INSERT INTO roles (id_role, name) VALUES (default, 'ROLE_ADMIN');
 
--- Insert users (passwords must be hashed)
-INSERT INTO users (id_user, username, password) VALUES
-(1, 'admin', '$2a$10$X9pC3dZ6zF/1UvJhQ9BO3uAaXjI68Md.jrQhuLxJ9hZ1jHvON47zG'), -- 'admin123'
-(2, 'user', '$2a$10$7Q4O8BjhPLX8F5UP9iPZdu5qgldXj6zU6ObQzSTyMcubclYVytVxq'); -- 'user123'
+/* Users */
+INSERT INTO users (id_user, username, password) VALUES (default, 'user', '$2a$10$kwmIdIgrS3XwUJXMaSfV4O92wLSV5WeMfMeg/ZmeVzdyW72xhNU7.');
+INSERT INTO users (id_user, username, password) VALUES (default, 'admin', '$2a$10$eUmWt/7ars7RgXhhmoEmOuUwOxnzmAI7pJY10qvjlCrCrKSH');
 
--- Insert user-role relationships (corrected table name `users_roles`)
-INSERT INTO users_roles (user_id, role_id) VALUES (1, 1); -- Admin user has ROLE_ADMIN
-INSERT INTO users_roles (user_id, role_id) VALUES (2, 2); -- Regular user has ROLE_USER
+/* Roles Users */
+INSERT INTO roles_users (id_user, id_role) VALUES (1, 1);
+INSERT INTO roles_users (id_user, id_role) VALUES (2, 2);
 
--- Insert profiles
-INSERT INTO profiles (id_profile, first_name, last_name, email, user_id) VALUES
-(1, 'John', 'Doe', 'john.doe@example.com', 1),
-(2, 'Jane', 'Smith', 'jane.smith@example.com', 2);

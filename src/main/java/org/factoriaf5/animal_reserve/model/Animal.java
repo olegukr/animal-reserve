@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.factoriaf5.animal_reserve.dto.AnimalDTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +15,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Data;
 
-
+@Data
 @Entity
 public class Animal {
 
@@ -34,10 +37,12 @@ public class Animal {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_id", nullable = false)
+    @JsonIgnore
     private Gender gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
+    @JsonIgnore
     private Country country;
 
     @Temporal(TemporalType.DATE)
@@ -102,7 +107,7 @@ public class Animal {
         this.type = type;
     }
 
-    public void setFamily(AnimalFamily family) {
+    public void setFamilyName(AnimalFamily family) {
         this.family = family;
     }
 

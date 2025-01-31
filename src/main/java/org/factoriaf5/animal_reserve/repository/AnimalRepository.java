@@ -19,7 +19,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
     List<Animal> findByCountryCountryName(String countryName);
 
-    List<Animal> findByFamilyFamilyNameAndTypeTypeName(String familyName, String typeName);
+    List<Animal> findByFamily_FamilyNameAndType_TypeName(String familyName, String typeName);
 
     Optional<Animal> findByName(String name);
 
@@ -27,6 +27,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     @Override
     boolean existsById(Long id);
 
-    // List<Animal> findByFamilyFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(String familyName, String typeName);
+    // List<Animal> findByFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(String familyName, String typeName);
 
 }

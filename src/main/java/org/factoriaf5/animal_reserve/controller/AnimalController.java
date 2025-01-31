@@ -20,6 +20,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+// @RestController
+// @RequestMapping("/api/v1/public")
+// public class AnimalController {
+
+
+//     @Autowired
+//     private AnimalRepository animalRepository;
+
+//     @Autowired
+//     private AnimalService animalService;
+
+//     @GetMapping("/animals")
+//     public ResponseEntity<?> getAllAnimals() {
+//         System.out.println("GET /api/v1/public/animals called");
+//         List<AnimalDTO> animalDTO = animalService.getAllAnimals();
+//         return ResponseEntity.ok(animalDTO);
+//     }
+// }
+
+// @RequestMapping("/api/v1/public")
+
 @RestController
 @RequestMapping("${api-endpoint}/animals")
 public class AnimalController {
@@ -30,7 +51,14 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
-    @GetMapping
+    @GetMapping("/public/all")
+    public ResponseEntity<?> getAllAnimals() {
+        System.out.println("GET /api/v1/public/animals/all called");
+        List<AnimalDTO> animalDTO = animalService.getAllAnimals();
+        return ResponseEntity.ok(animalDTO);
+    }
+
+    @GetMapping("/public")
     public Page<AnimalDTO> getPaginatedAnimals(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
@@ -38,7 +66,8 @@ public class AnimalController {
         return animalService.getPaginatedAnimals(page, size);
     }
 
-    @GetMapping("/family")
+
+    @GetMapping("/public/family")
     public Page<AnimalDTO> getAnimalsByFamily(
             @RequestParam String family,
             @RequestParam(defaultValue = "0") int page,
@@ -47,12 +76,12 @@ public class AnimalController {
         return animalService.getAnimalsByFamily(family, page, size);
     }
 
-    @GetMapping("/country")
+    @GetMapping("/public/country")
     public List<AnimalDTO> getAnimalsByCountry(@RequestParam String country) {
         return animalService.getAnimalsByCountry(country);
     }
 
-    @GetMapping("/family-and-type")
+    @GetMapping("/public/family-and-type")
     public List<AnimalDTO> getAnimalsByFamilyAndType(
             @RequestParam String family,
             @RequestParam String type
@@ -60,17 +89,17 @@ public class AnimalController {
         return animalService.getAnimalsByFamilyAndType(family, type);
     }
 
-    @GetMapping("/count")
+    @GetMapping("/admin/count")
     public long getTotalAnimals() {
     return animalService.getTotalAnimals();
     }
 
-    @GetMapping("/name")
+    @GetMapping("/admin/name")
     public AnimalDTO getAnimalByName(@RequestParam String name) {
     return animalService.getAnimalByName(name);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/{id}")
     public ResponseEntity<?> getAnimalById(@PathVariable Long id) {
         try {
             AnimalDTO animalDTO = animalService.getAnimalById(id);
@@ -80,12 +109,12 @@ public class AnimalController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/admin")
     public AnimalDTO addAnimal(@RequestBody AnimalDTO animalDTO) {
         return animalService.addAnimal(animalDTO);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> deleteAnimal(@PathVariable Long id) {
         try {
             String message = animalService.deleteAnimalById(id);
@@ -95,7 +124,7 @@ public class AnimalController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<?> updateAnimal(@PathVariable Long id, @RequestBody AnimalDTO updatedAnimalDTO) {
         try {
             AnimalDTO updatedAnimal = animalService.updateAnimal(id, updatedAnimalDTO);
