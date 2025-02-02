@@ -69,7 +69,8 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                 .permitAll()
-                .requestMatchers(endpoint + "/animals/public/**").permitAll() // ✅ Allow public access
+                .requestMatchers(endpoint + "/login").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(endpoint + "/animals/public/**").permitAll() // Allow public access
                 .requestMatchers(endpoint + "/animals/admin/**").hasRole("ADMIN") // Admin-only routes
                 .anyRequest().authenticated() // All other routes require authentication
             )

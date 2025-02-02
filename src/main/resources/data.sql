@@ -120,14 +120,23 @@ INSERT INTO animal (name, type_id, family_id, gender_id, country_id, date_of_ent
 ('Volcano', 35, 5, 1, 3, '2025-01-07', NULL);
 
 /* Roles */
-INSERT INTO roles (id_role, name) VALUES (default, 'ROLE_USER');
-INSERT INTO roles (id_role, name) VALUES (default, 'ROLE_ADMIN');
+INSERT INTO roles (id_role, name) VALUES 
+(default, 'ROLE_USER'),
+(default, 'ROLE_ADMIN');
 
 /* Users */
-INSERT INTO users (id_user, username, password) VALUES (default, 'user', '$2a$10$kwmIdIgrS3XwUJXMaSfV4O92wLSV5WeMfMeg/ZmeVzdyW72xhNU7.');
-INSERT INTO users (id_user, username, password) VALUES (default, 'admin', '$2a$10$eUmWt/7ars7RgXhhmoEmOuUwOxnzmAI7pJY10qvjlCrCrKSH');
+INSERT INTO users (id_user, username, password) VALUES 
+(default, 'user', '$2a$10$kwmIdIgrS3XwUJXMaSfV4O92wLSV5WeMfMeg/ZmeVzdyW72xhNU7.'),
+(default, 'admin', '$2a$10$4LdSvAZIleNRnELIJjoXWuek8EmkJ.BhFwOG/UvwV5pdJuj50VXwe');
+
+/* Profiles */
+INSERT INTO profiles (id_profile, first_name, last_name, email, user_id) VALUES 
+(default, 'John', 'Doe', 'user@example.com', 1), -- Profile for user
+(default, 'Jane', 'Admin', 'admin@example.com', 2); -- Profile for admin
 
 /* Roles Users */
-INSERT INTO roles_users (id_user, id_role) VALUES (1, 1);
-INSERT INTO roles_users (id_user, id_role) VALUES (2, 2);
+INSERT INTO roles_users (id_user, id_role) VALUES 
+(1, 1), -- user -> ROLE_USER
+(2, 2); -- admin -> ROLE_ADMIN
+
 

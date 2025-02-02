@@ -27,6 +27,4 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     @Override
     boolean existsById(Long id);
 
-    // List<Animal> findByFamilyNameIgnoreCaseAndTypeTypeNameIgnoreCase(String familyName, String typeName);
-
 }

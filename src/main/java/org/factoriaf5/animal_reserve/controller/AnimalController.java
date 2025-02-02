@@ -90,9 +90,10 @@ public class AnimalController {
     }
 
     @GetMapping("/admin/count")
-    public long getTotalAnimals() {
-    return animalService.getTotalAnimals();
-    }
+public ResponseEntity<String> getTotalAnimals() {
+    long totalAnimals = animalService.getTotalAnimals();
+    return ResponseEntity.ok(Long.toString(totalAnimals).trim());
+}
 
     @GetMapping("/admin/name")
     public AnimalDTO getAnimalByName(@RequestParam String name) {
